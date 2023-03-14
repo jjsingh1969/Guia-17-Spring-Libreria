@@ -19,9 +19,7 @@ public class EditorialServicio {
     @Transactional
     public void crearEditorial(String nombre) throws MiException {
         
-        if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("El nombre no puede ser nulo o estar vacio");
-        }
+         validar(nombre);
 
         Editorial editorial = new Editorial();
 
@@ -40,15 +38,10 @@ public class EditorialServicio {
         return editorial;
     }
     
+     @Transactional
     public void modificarEditorial(String nombre, String id) throws MiException{
         
-        if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("El nombre no puede ser nulo o estar vacio");
-        }
-        
-        if (id.isEmpty() || id == null) {
-            throw new MiException("El idEditorial no puede ser nulo o estar vacio");        
-        }
+       validar(nombre);
         
         Optional<Editorial> respuesta = editorialRepositorio.findById(id);
         
@@ -61,6 +54,19 @@ public class EditorialServicio {
             editorialRepositorio.save(editorial);
             
         }
+    }
+    
+    public Editorial getOne(String id) {
+        return editorialRepositorio.getOne(id);
+    }
+    
+    private void validar (String nombre)throws MiException{
+        
+         if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("El nombre no puede ser nulo o estar vacio");
+        }
+        
+        
     }
     
     

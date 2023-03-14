@@ -1,28 +1,32 @@
-
 package com.egg.biblioteca.entidades;
 
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 public class Libro {
-    @Id   
+
+    @Id
     private Long isbn;
     private String titulo;
     private Integer ejemplares;
-    
+
     @Temporal(TemporalType.DATE)
     private Date alta;
-    
+
     @ManyToOne
     private Autor autor;
-    
+
     @ManyToOne
     private Editorial editorial;
+
+    @OneToOne
+    private Imagen imagen;
 
     public Libro() {
     }
@@ -74,6 +78,13 @@ public class Libro {
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }
-    
-    
+
+    public Imagen getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
+    }
+
 }
